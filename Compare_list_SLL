@@ -1,0 +1,76 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+class LinkedList {
+    Node head;
+
+    public LinkedList() {
+        this.head = null;
+    }
+    public void append(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+        } else {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+    }
+
+    public static int compareLinkedLists(LinkedList list1, LinkedList list2) {
+        Node current1 = list1.head;
+        Node current2 = list2.head;
+
+        while (current1 != null && current2 != null) {
+            if (current1.data != current2.data) {
+                return 0;
+            }
+            current1 = current1.next;
+            current2 = current2.next;
+        }
+
+        if (current1 == null && current2 == null) {
+            return 1;
+        }
+
+        return 0;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        LinkedList list1 = new LinkedList();
+        LinkedList list2 = new LinkedList();
+        int n1 = scanner.nextInt();
+        for (int i = 0; i < n1; i++) {
+            int data = scanner.nextInt();
+            list1.append(data);
+        }
+        int n2 = scanner.nextInt();
+        for (int i = 0; i < n2; i++) {
+            int data = scanner.nextInt();
+            list2.append(data);
+        }
+
+        int result = LinkedList.compareLinkedLists(list1, list2);
+        if (result == 1) {
+            System.out.println("1");
+        } else {
+            System.out.println("0");
+        }
+
+        scanner.close();
+    }
+}
