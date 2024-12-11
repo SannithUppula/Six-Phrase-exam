@@ -1,0 +1,61 @@
+import java.util.Scanner;
+class DoublyLinkedListNode {
+    int data;
+    DoublyLinkedListNode next;
+    DoublyLinkedListNode prev;
+
+    public DoublyLinkedListNode(int data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+public class ReverseDoublyLinkedList {
+    public static DoublyLinkedListNode reverse(DoublyLinkedListNode head) {
+        if (head == null) return null;
+        DoublyLinkedListNode temp = null;
+        DoublyLinkedListNode current = head;
+        while (current != null) {
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+        if (temp != null) {
+            head = temp.prev;
+        }
+        return head;
+    }
+    public static void printList(DoublyLinkedListNode head) {
+        DoublyLinkedListNode current = head;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.next;
+        }
+        System.out.println();
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int t = scanner.nextInt();
+        while (t-->0) {
+            int n = scanner.nextInt();
+            DoublyLinkedListNode head = null, tail = null;
+            for (int i = 0; i < n; i++) {
+                int data = scanner.nextInt();
+                DoublyLinkedListNode newNode = new DoublyLinkedListNode(data);
+                if (head == null) {
+                    head = newNode;
+                    tail = newNode;
+                }
+                else {
+                    tail.next = newNode;
+                    newNode.prev = tail;
+                    tail = newNode;
+                }
+            }
+            head = reverse(head);
+            printList(head);
+        }
+        scanner.close();
+    }
+}
