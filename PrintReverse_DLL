@@ -36,11 +36,15 @@ public class ReverseDoublyLinkedList {
     }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter no of testcases: ");
         int t = scanner.nextInt();
         while (t-->0) {
+            System.out.print("Enter no of Elements: ");
             int n = scanner.nextInt();
             DoublyLinkedListNode head = null, tail = null;
+            System.out.print("Enter Elements: ");
             for (int i = 0; i < n; i++) {
+                
                 int data = scanner.nextInt();
                 DoublyLinkedListNode newNode = new DoublyLinkedListNode(data);
                 if (head == null) {
@@ -53,6 +57,7 @@ public class ReverseDoublyLinkedList {
                     tail = newNode;
                 }
             }
+            System.out.print("Reversed Elements: ");
             head = reverse(head);
             printList(head);
         }
